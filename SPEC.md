@@ -176,9 +176,76 @@ STEP 1 → STEP 2 → STEP 3 → STEP 4 → 完了
 
 ---
 
+## Twilio SMS セットアップ
+
+予約確認SMS（即時）と当日リマインドSMSを利用するための設定手順です。
+
+### 1. Twilio アカウントの準備
+
+1. [https://www.twilio.com](https://www.twilio.com) でアカウントを作成
+2. コンソールで **Account SID** と **Auth Token** を確認
+3. 「Phone Numbers」→「Buy a Number」で日本向けSMS送信可能な番号を取得
+   - 「SMS」にチェックを入れて検索
+   - 取得した番号は `+8150XXXXXXXX` 形式
+
+### 2. Code.gs の CONFIG を設定
+
+```javascript
+TWILIO_ACCOUNT_SID: 'ACxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+TWILIO_AUTH_TOKEN:  'your_auth_token',
+TWILIO_FROM_NUMBER: '+8150XXXXXXXX',   // 取得したTwilio番号
+SMS_ENABLED:        true,              // false → true に変更
+REMINDER_HOUR:      9,                 // リマインド送信時刻（デフォルト9時）
+```
+
+設定後は「デプロイ → デプロイを管理 → 新しいバージョン」で再デプロイしてください。
+
+### 3. 当日リマインドのトリガー設定
+
+**方法A（推奨）：GASエディタで一度だけ実行**
+
+GASエディタで `createDayOfReminderTrigger` 関数を選択して「実行」をクリック。
+毎日 `REMINDER_HOUR` 時に `sendDayOfReminders` が自動実行されるトリガーが設定されます。
+
+**方法B：手動設定**
+
+GASエディタ →「トリガー」（時計アイコン）→「トリガーを追加」
+- 実行する関数: `sendDayOfReminders`
+- イベントのソース: 時間主導型
+- 時間ベースのトリガーのタイプ: 日付ベースのタイマー
+- 時刻: 午前9時〜10時
+
+### 4. SMS 動作確認
+
+1. `SMS_ENABLED: false` のまま予約 → GASログに「送信スキップ」が出れば正常
+2. `SMS_ENABLED: true` に変更して予約 → 入力した電話番号にSMSが届くか確認
+3. GASエディタで `sendDayOfReminders` を手動実行 → 当日予約へのリマインドSMS受信確認
+4. 同日に作った予約で `sendDayOfReminders` を実行 → スキップされることを確認（ログに「当日予約のためスキップ」）
+
+### SMS メッセージ例
+
+**予約確認（即時）:**
+```
+【ご予約確認】
+山田太郎様のご予約を承りました。
+日時: 3月25日(火) 14:00〜
+サービス: 手洗い洗車
+ご不明な点はお電話ください。
+```
+
+**当日リマインド（当日朝）:**
+```
+【本日のご予約】
+山田太郎様、本日14:00よりご予約です。
+サービス: 手洗い洗車
+お気をつけてお越しください。
+```
+
+---
+
 ## 今後の拡張ポイント
 
-- [ ] 確認メール送信（GAS + Gmail API）
+- [x] SMS確認・リマインド（Twilio）
 - [ ] キャンセル機能
 - [ ] 管理者向けダッシュボード
 - [ ] 予約可能日の事前ハイライト（月単位の一括取得）
