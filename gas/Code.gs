@@ -26,6 +26,12 @@ const CONFIG = {
 // ============================================================
 function doGet(e) {
   try {
+    // ?month=YYYY-MM の場合は月単位の空き状況を返す
+    if (e.parameter.month) {
+      const duration = parseInt(e.parameter.duration) || 1;
+      return getMonthAvailability(e.parameter.month, duration);
+    }
+
     const date     = e.parameter.date;
     const duration = parseInt(e.parameter.duration);
 
@@ -392,6 +398,60 @@ function toJSTDate(dateStr, h, m) {
   const hh = String(h).padStart(2, '0');
   const mm = String(m).padStart(2, '0');
   return new Date(`${dateStr}T${hh}:${mm}:00+09:00`);
+}
+
+/**
+ * 指定月の全日付について空き状況を返す
+ * カレンダーイベントを1回のgetEventsで一括取得して効率化
+ * @param {string} monthStr - "YYYY-MM" 形式
+ * @param {number} duration - 利用時間（時間）
+ * @returns {ContentService.TextOutput} { days: { "YYYY-MM-DD": "available"|"few"|"full"|"past" } }
+ */
+function getMonthAvailability(monthStr, duration) {
+  const parts     = monthStr.split('-');
+  const year      = parseInt(parts[0]);
+  const month     = parseInt(parts[1]) - 1; // 0-indexed
+  const now       = new Date();
+  const todayStr  = formatDate(now);
+
+  const monthStart = new Date(year, month, 1, 0, 0, 0);
+  const monthEnd   = new Date(year, month + 1, 0, 23, 59, 59);
+  const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+  // 月全体のカレンダーイベントを1回で取得
+  const calendar = CalendarApp.getCalendarById(CONFIG.CALENDAR_ID);
+  const events   = calendar.getEvents(monthStart, monthEnd);
+  const busyList = events
+    .filter(ev => !ev.isAllDayEvent())
+    .map(ev => ({ start: ev.getStartTime(), end: ev.getEndTime() }));
+
+  const days = {};
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const dateStr = `${String(year)}-${String(month + 1).padStart(2, '0')}-${String(d).padStart(2, '0')}`;
+
+    // 過去の日付
+    if (dateStr < todayStr) {
+      days[dateStr] = 'past';
+      continue;
+    }
+
+    // スロット候補を生成して空き数を計算
+    const slots     = generateSlots(dateStr, duration);
+    let   available = 0;
+
+    slots.forEach(slot => {
+      const isPast     = slot.start <= now;
+      const isConflict = isOverlapping(slot.start, slot.end, busyList);
+      if (!isPast && !isConflict) available++;
+    });
+
+    if (available === 0)      days[dateStr] = 'full';
+    else if (available <= 3)  days[dateStr] = 'few';
+    else                      days[dateStr] = 'available';
+  }
+
+  return jsonResponse({ days });
 }
 
 /**
