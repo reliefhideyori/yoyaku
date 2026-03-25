@@ -11,16 +11,17 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --base:          #0a0a0a;
+      --base:          #0e0d10;
       --surface:       #ffffff;
-      --bg:            #f7f6f3;
-      --border:        #e4e4e0;
-      --muted:         #999990;
-      --accent:        #8B7355;
-      --accent-light:  #f5f0e8;
-      --accent-dark:   #6d5a41;
-      --disabled-bg:   #f0f0ee;
-      --disabled-text: #c0c0bc;
+      --bg:            #f4f2ed;
+      --border:        #d6d0c4;
+      --muted:         #8a8478;
+      --accent:        #b8912e;
+      --accent-light:  #fdf6e3;
+      --accent-dark:   #8b6b20;
+      --navy:          #1a2a4a;
+      --disabled-bg:   #eeecea;
+      --disabled-text: #b8b4ac;
       --error:         #c0392b;
       --success:       #2d7d4e;
       --radius:        12px;
@@ -95,7 +96,8 @@
     .progress-labels { display: flex; justify-content: space-between; margin-top: 8px; }
     .progress-labels span {
       font-size: 10px; color: var(--muted);
-      letter-spacing: 0.05em; text-align: center; width: 40px;
+      letter-spacing: 0.05em; text-align: center;
+      white-space: nowrap; width: 28px;
     }
     .progress-labels span.active { color: var(--accent); font-weight: 500; }
 
@@ -112,8 +114,8 @@
       font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
       color: var(--accent); text-transform: uppercase; margin-bottom: 4px;
     }
-    .step-heading h2 { font-size: 20px; font-weight: 700; letter-spacing: 0.02em; }
-    .step-heading p { font-size: 13px; color: var(--muted); margin-top: 4px; }
+    .step-heading h2 { font-size: 23px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
+    .step-heading p { font-size: 14px; color: var(--muted); margin-top: 4px; }
     .step-encourage { font-size: 12px; color: var(--accent); margin-top: 2px; font-weight: 400; }
 
     /* ===== Back Button ===== */
@@ -431,7 +433,7 @@
       .progress-dot { width: 24px; height: 24px; font-size: 10px; }
       .steps-container { margin-top: 10px; }
       .step-heading { margin-bottom: 12px; }
-      .step-heading h2 { font-size: 17px; }
+      .step-heading h2 { font-size: 17px; white-space: normal; }
       .step-heading p { margin-top: 2px; font-size: 12px; }
       .service-btn { padding: 13px 18px; }
       .service-btn .svc-main { font-size: 15px; }
@@ -461,7 +463,7 @@
       .progress-wrap { padding-top: 8px; }
       .steps-container { margin-top: 8px; }
       .step-heading { margin-bottom: 8px; }
-      .step-heading h2 { font-size: 16px; }
+      .step-heading h2 { font-size: 16px; white-space: normal; }
       .step-heading p { display: none; }
       .progress-labels { display: none; }
       .progress-wrap { padding-bottom: 2px; }
@@ -500,7 +502,7 @@
     <div class="step active" id="step-1">
       <div class="step-heading">
         <div class="step-num">Step 1</div>
-        <h2>メニューを<br>お選びください</h2>
+        <h2>メニューをお選びください</h2>
         <p>ご希望のサービスを選択してください</p>
       </div>
 
@@ -554,7 +556,7 @@
     <div class="step" id="step-2">
       <div class="step-heading">
         <div class="step-num">Step 2</div>
-        <h2>日付を<br>お選びください</h2>
+        <h2>日付をお選びください</h2>
         <p>ご希望の日付をタップしてください</p>
       </div>
 
@@ -572,7 +574,7 @@
     <div class="step" id="step-3">
       <div class="step-heading">
         <div class="step-num">Step 3</div>
-        <h2>時刻を<br>お選びください</h2>
+        <h2>時刻をお選びください</h2>
         <p class="step-encourage">あと少しで完了です</p>
       </div>
 
@@ -594,7 +596,7 @@
     <div class="step" id="step-4">
       <div class="step-heading">
         <div class="step-num">Step 4</div>
-        <h2>お客様情報を<br>ご入力ください</h2>
+        <h2>お客様情報をご入力ください</h2>
         <p class="step-encourage">あと少しで完了です</p>
       </div>
 
@@ -643,7 +645,7 @@
       <div class="complete-icon">
         <svg viewBox="0 0 24 24"><path d="M5 13l4 4L19 7"/></svg>
       </div>
-      <h2>ご予約が<br>完了しました</h2>
+      <h2>ご予約が完了しました</h2>
       <p class="complete-sub">お申し込みありがとうございます</p>
 
       <div class="complete-summary">
