@@ -6,7 +6,7 @@
   <title>ご予約</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -110,22 +110,18 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .step-heading { margin-bottom: 32px; }
-    .step-heading .step-num {
-      font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
-      color: var(--accent); text-transform: uppercase; margin-bottom: 4px;
-    }
-    .step-heading h2 { font-size: 23px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; line-height: 1.2; font-family: 'Klee One', var(--font); }
-    .step-heading p { font-size: 14px; color: var(--muted); margin-top: 4px; }
-    .step-encourage { font-size: 12px; color: var(--accent); margin-top: 2px; font-weight: 400; }
+    .step-heading h2 { font-size: 23px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; line-height: 1.2; }
+    .step-encourage { font-size: 12px; color: var(--accent); margin-top: 4px; font-weight: 400; }
 
     /* ===== Back Button ===== */
     .back-btn {
-      display: inline-flex; align-items: center; gap: 4px;
-      background: none; border: none; color: var(--muted);
+      display: inline-flex; align-items: center; gap: 6px;
+      background: none; border: 1.5px solid var(--border);
+      border-radius: var(--radius-pill); color: var(--muted);
       font-family: var(--font); font-size: 13px; cursor: pointer;
-      padding: 8px 0; margin-top: 16px; transition: color var(--trans);
+      padding: 9px 20px; margin-top: 16px; transition: all var(--trans);
     }
-    .back-btn:hover { color: var(--base); }
+    .back-btn:hover { border-color: var(--base); color: var(--base); }
     .back-btn::before { content: '\2190'; font-size: 14px; }
 
     /* ===== STEP 1: Service ===== */
@@ -139,16 +135,16 @@
       font-family: var(--font); text-align: left;
     }
     .service-btn:hover { border-color: var(--accent); box-shadow: var(--shadow); }
-    .service-btn.selected { background: var(--accent); border-color: var(--accent); color: white; }
+    .service-btn.selected { background: var(--surface); border-color: var(--accent); border-width: 2px; color: var(--base); }
     .service-btn .svc-main { font-size: 19px; font-weight: 700; letter-spacing: 0.02em; }
     .service-btn .svc-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
-    .service-btn.selected .svc-sub { color: rgba(255,255,255,0.75); }
+    .service-btn.selected .svc-sub { color: var(--muted); }
     .service-btn .svc-arrow {
-      font-size: 20px; color: var(--border); transition: all var(--trans);
+      font-size: 20px; color: var(--border); transition: all var(--trans); flex-shrink: 0;
     }
-    .service-btn.selected .svc-arrow { color: white; }
+    .service-btn.selected .svc-arrow { color: var(--accent); font-size: 18px; font-weight: 700; }
     .service-btn:hover .svc-arrow { color: var(--accent); transform: translateX(3px); }
-    .service-btn.selected:hover .svc-arrow { color: white; }
+    .service-btn.selected:hover .svc-arrow { transform: none; }
 
     /* Options Panel */
     .options-panel {
@@ -434,7 +430,6 @@
       .steps-container { margin-top: 10px; }
       .step-heading { margin-bottom: 12px; }
       .step-heading h2 { font-size: 17px; white-space: normal; }
-      .step-heading p { margin-top: 2px; font-size: 12px; }
       .service-btn { padding: 13px 18px; }
       .service-btn .svc-main { font-size: 15px; }
       .service-grid { gap: 8px; }
@@ -464,7 +459,7 @@
       .steps-container { margin-top: 8px; }
       .step-heading { margin-bottom: 8px; }
       .step-heading h2 { font-size: 16px; white-space: normal; }
-      .step-heading p { display: none; }
+      .step-encourage { display: none; }
       .progress-labels { display: none; }
       .progress-wrap { padding-bottom: 2px; }
     }
@@ -501,9 +496,7 @@
     <!-- STEP 1: Service -->
     <div class="step active" id="step-1">
       <div class="step-heading">
-        <div class="step-num">Step 1</div>
         <h2>メニューをお選びください</h2>
-        <p>ご希望のサービスを選択してください</p>
       </div>
 
       <div class="service-grid">
@@ -555,9 +548,7 @@
     <!-- STEP 2: Calendar -->
     <div class="step" id="step-2">
       <div class="step-heading">
-        <div class="step-num">Step 2</div>
         <h2>日付をお選びください</h2>
-        <p>ご希望の日付をタップしてください</p>
       </div>
 
       <div class="cal-nav">
@@ -573,7 +564,6 @@
     <!-- STEP 3: Time Slots -->
     <div class="step" id="step-3">
       <div class="step-heading">
-        <div class="step-num">Step 3</div>
         <h2>時刻をお選びください</h2>
         <p class="step-encourage">あと少しで完了です</p>
       </div>
@@ -595,7 +585,6 @@
     <!-- STEP 4: Form -->
     <div class="step" id="step-4">
       <div class="step-heading">
-        <div class="step-num">Step 4</div>
         <h2>お客様情報をご入力ください</h2>
         <p class="step-encourage">あと少しで完了です</p>
       </div>
@@ -782,21 +771,27 @@ function updateProgress(step) {
 //  STEP 1: サービス選択
 // ============================================================
 function selectService(type) {
-  document.getElementById('btn-wash').classList.remove('selected');
-  document.getElementById('btn-wash-plus').classList.remove('selected');
+  const btnWash = document.getElementById('btn-wash');
+  const btnPlus = document.getElementById('btn-wash-plus');
+  btnWash.classList.remove('selected');
+  btnPlus.classList.remove('selected');
+  btnWash.querySelector('.svc-arrow').textContent = '\u203A';
+  btnPlus.querySelector('.svc-arrow').textContent = '\u203A';
 
   if (type === 'wash') {
     state.service  = 'wash';
     state.duration = 1;
     state.options  = [];
-    document.getElementById('btn-wash').classList.add('selected');
+    btnWash.classList.add('selected');
+    btnWash.querySelector('.svc-arrow').textContent = '\u2713';
     toggleOptionsPanel(false);
     // チェックボックスをリセット
     document.querySelectorAll('#options-panel input[type="checkbox"]').forEach(cb => cb.checked = false);
     setTimeout(() => goTo(2), 250);
   } else {
     state.service = 'wash-plus';
-    document.getElementById('btn-wash-plus').classList.add('selected');
+    btnPlus.classList.add('selected');
+    btnPlus.querySelector('.svc-arrow').textContent = '\u2713';
     toggleOptionsPanel(true);
   }
 }
