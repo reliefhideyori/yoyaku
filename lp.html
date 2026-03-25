@@ -252,19 +252,19 @@
       margin-bottom: 16px;
     }
     .modal-cal-dow {
-      text-align: center; font-size: 10px; font-weight: 700;
-      color: var(--muted); letter-spacing: 0.06em; padding: 8px 0;
+      text-align: center; font-size: 12px; font-weight: 700;
+      color: var(--muted); letter-spacing: 0.04em; padding: 8px 0;
     }
     .modal-cal-dow.sun { color: #c0392b; }
     .modal-cal-dow.sat { color: #2980b9; }
     .modal-cal-day {
       aspect-ratio: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 1px;
-      border-radius: 8px; font-size: 12px; font-weight: 500;
+      align-items: center; justify-content: center; gap: 2px;
+      border-radius: 8px; font-size: 14px; font-weight: 500;
       transition: background var(--trans); position: relative;
     }
     .modal-cal-day .day-num { line-height: 1; }
-    .modal-cal-day .day-mark { font-size: 9px; line-height: 1; }
+    .modal-cal-day .day-mark { font-size: 11px; line-height: 1; }
     .modal-cal-day.sun:not(.past):not(.empty) { color: #e74c3c; }
     .modal-cal-day.sat:not(.past):not(.empty) { color: #3498db; }
 
@@ -272,9 +272,9 @@
     .modal-cal-day.empty { }
     .modal-cal-day.past  { color: var(--disabled-text); }
     .modal-cal-day.full  {
-      color: var(--disabled-text); background: var(--disabled-bg);
+      color: #c0392b; background: #fef0ee;
     }
-    .modal-cal-day.full .day-mark  { color: var(--disabled-text); }
+    .modal-cal-day.full .day-mark  { color: #c0392b; }
     .modal-cal-day.few  {
       background: var(--accent-light);
     }
@@ -317,7 +317,7 @@
     }
     .legend-dot.available { background: #edf7f1; border: 1px solid #a5d6b8; }
     .legend-dot.few       { background: var(--accent-light); border: 1px solid #e0c070; }
-    .legend-dot.full      { background: var(--disabled-bg); border: 1px solid var(--border); }
+    .legend-dot.full      { background: #fef0ee; border: 1px solid #e8a090; }
 
     /* 予約ボタン */
     .modal-reserve-btn {
