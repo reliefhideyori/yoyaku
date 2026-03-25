@@ -13,10 +13,10 @@ const CONFIG = {
 
   // ===== Twilio SMS 設定 =====
   // 利用する場合は以下4項目を入力し、SMS_ENABLED を true に変更してください
-  TWILIO_ACCOUNT_SID: '',               // Account SID（ACxxxxxxxxxxxxxxxxxx）
-  TWILIO_AUTH_TOKEN:  '',               // Auth Token
-  TWILIO_FROM_NUMBER: '',               // 送信元番号（例: +8150XXXXXXXX）
-  SMS_ENABLED:        false,            // true にすると実際にSMSを送信します
+  // Twilio認証情報はGASのスクリプトプロパティに保存してください（コードに直接書かない）
+  // GASエディタ → プロジェクトの設定（歯車アイコン）→ スクリプトプロパティ で設定
+  // キー: TWILIO_ACCOUNT_SID / TWILIO_AUTH_TOKEN / TWILIO_FROM_NUMBER
+  SMS_ENABLED:        true,             // true にすると実際にSMSを送信します
   REMINDER_HOUR:      9                 // 当日リマインド送信時刻（時）
 };
 
@@ -237,9 +237,11 @@ function createDayOfReminderTrigger() {
  * @param {string} message - メッセージ本文
  */
 function sendSms(toPhone, message) {
-  const sid   = CONFIG.TWILIO_ACCOUNT_SID;
-  const token = CONFIG.TWILIO_AUTH_TOKEN;
-  const from  = CONFIG.TWILIO_FROM_NUMBER;
+  // 認証情報はスクリプトプロパティから取得（セキュリティのためコードに直接書かない）
+  const props = PropertiesService.getScriptProperties();
+  const sid   = props.getProperty('TWILIO_ACCOUNT_SID');
+  const token = props.getProperty('TWILIO_AUTH_TOKEN');
+  const from  = props.getProperty('TWILIO_FROM_NUMBER');
 
   if (!sid || !token || !from) {
     Logger.log('[SMS] Twilio設定が不完全です（SID/Token/From を確認してください）');
