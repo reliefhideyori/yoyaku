@@ -6,7 +6,7 @@
   <title>ご予約</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&family=Klee+One:wght@400;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -109,12 +109,12 @@
       from { opacity: 0; transform: translateY(12px); }
       to   { opacity: 1; transform: translateY(0); }
     }
-    .step-heading { margin-bottom: 24px; }
+    .step-heading { margin-bottom: 32px; }
     .step-heading .step-num {
       font-size: 10px; font-weight: 500; letter-spacing: 0.18em;
       color: var(--accent); text-transform: uppercase; margin-bottom: 4px;
     }
-    .step-heading h2 { font-size: 23px; font-weight: 700; letter-spacing: 0.02em; white-space: nowrap; }
+    .step-heading h2 { font-size: 23px; font-weight: 600; letter-spacing: 0.04em; white-space: nowrap; line-height: 1.2; font-family: 'Klee One', var(--font); }
     .step-heading p { font-size: 14px; color: var(--muted); margin-top: 4px; }
     .step-encourage { font-size: 12px; color: var(--accent); margin-top: 2px; font-weight: 400; }
 
@@ -140,8 +140,8 @@
     }
     .service-btn:hover { border-color: var(--accent); box-shadow: var(--shadow); }
     .service-btn.selected { background: var(--accent); border-color: var(--accent); color: white; }
-    .service-btn .svc-main { font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
-    .service-btn .svc-sub { font-size: 12px; color: var(--muted); margin-top: 2px; }
+    .service-btn .svc-main { font-size: 19px; font-weight: 700; letter-spacing: 0.02em; }
+    .service-btn .svc-sub { font-size: 13px; color: var(--muted); margin-top: 3px; }
     .service-btn.selected .svc-sub { color: rgba(255,255,255,0.75); }
     .service-btn .svc-arrow {
       font-size: 20px; color: var(--border); transition: all var(--trans);
