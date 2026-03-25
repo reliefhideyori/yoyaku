@@ -2,7 +2,7 @@
 <html lang="ja">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
   <title>ご予約</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -34,6 +34,7 @@
 
     html, body {
       min-height: 100vh;
+      min-height: 100dvh;
       background: var(--bg);
       font-family: var(--font);
       color: var(--base);
@@ -45,14 +46,15 @@
     /* ===== Layout ===== */
     .booking-wrap {
       min-height: 100vh;
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
       align-items: center;
-      padding: 0 0 60px;
+      padding: 0 0 max(32px, calc(16px + env(safe-area-inset-bottom)));
     }
     .booking-header {
       width: 100%; max-width: var(--max-w);
-      padding: 40px 24px 0; text-align: center;
+      padding: 32px 24px 0; text-align: center;
     }
     .booking-header .logo {
       font-size: 11px; font-weight: 500;
@@ -64,7 +66,7 @@
     }
 
     /* ===== Progress ===== */
-    .progress-wrap { width: 100%; max-width: var(--max-w); padding: 28px 24px 0; }
+    .progress-wrap { width: 100%; max-width: var(--max-w); padding: 22px 24px 0; }
     .progress-track {
       position: relative; display: flex;
       align-items: center; justify-content: space-between;
@@ -98,7 +100,7 @@
     .progress-labels span.active { color: var(--accent); font-weight: 500; }
 
     /* ===== Steps ===== */
-    .steps-container { width: 100%; max-width: var(--max-w); padding: 0 24px; margin-top: 28px; }
+    .steps-container { width: 100%; max-width: var(--max-w); padding: 0 24px; margin-top: 22px; }
     .step { display: none; animation: stepIn 0.3s ease forwards; }
     .step.active { display: block; }
     @keyframes stepIn {
@@ -411,6 +413,58 @@
     .cal-add-btn:active {
       transform: scale(0.96);
       opacity: 0.8;
+    }
+
+    /* ===== 縦幅レスポンシブ (少しだけスクロールが発生する状況を防ぐ) ===== */
+    @media (max-height: 740px) {
+      .booking-header { padding-top: 20px; }
+      .progress-wrap { padding-top: 14px; }
+      .steps-container { margin-top: 14px; }
+      .step-heading { margin-bottom: 18px; }
+    }
+
+    @media (max-height: 660px) {
+      .booking-header { padding-top: 12px; }
+      .booking-header .logo { margin-bottom: 2px; }
+      .booking-header h1 { font-size: 18px; }
+      .progress-wrap { padding-top: 10px; }
+      .progress-dot { width: 24px; height: 24px; font-size: 10px; }
+      .steps-container { margin-top: 10px; }
+      .step-heading { margin-bottom: 12px; }
+      .step-heading h2 { font-size: 17px; }
+      .step-heading p { margin-top: 2px; font-size: 12px; }
+      .service-btn { padding: 13px 18px; }
+      .service-btn .svc-main { font-size: 15px; }
+      .service-grid { gap: 8px; }
+      .cal-nav { padding: 8px 14px; margin-bottom: 10px; }
+      .cal-dow { padding: 7px 0; font-size: 9px; }
+      .step-meta { padding: 8px 12px; margin-bottom: 12px; }
+      .slot-btn { padding: 9px 0; font-size: 12px; }
+      .skeleton { height: 36px; }
+      .summary-card { padding: 14px; margin-bottom: 16px; }
+      .form-group { margin-bottom: 14px; }
+      .form-input, .form-textarea { padding: 10px 12px; font-size: 14px; }
+      .form-textarea { min-height: 60px; }
+      .submit-btn { padding: 13px; margin-top: 4px; }
+      .back-btn { margin-top: 8px; }
+      #step-complete { padding: 8px 0; }
+      .complete-icon { width: 56px; height: 56px; margin-bottom: 14px; }
+      #step-complete h2 { font-size: 18px; margin-bottom: 4px; }
+      #step-complete .complete-sub { margin-bottom: 18px; }
+      .complete-summary { padding: 14px; margin-bottom: 14px; }
+      .options-panel.open { padding: 14px; }
+      .option-item { padding: 10px 0; }
+    }
+
+    @media (max-height: 580px) {
+      .booking-header { padding-top: 8px; }
+      .progress-wrap { padding-top: 8px; }
+      .steps-container { margin-top: 8px; }
+      .step-heading { margin-bottom: 8px; }
+      .step-heading h2 { font-size: 16px; }
+      .step-heading p { display: none; }
+      .progress-labels { display: none; }
+      .progress-wrap { padding-bottom: 2px; }
     }
   </style>
 </head>
