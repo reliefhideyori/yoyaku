@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>手洗い洗車 Premium</title>
+  <title>手洗い洗車 予約</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -11,342 +11,196 @@
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --base:          #0e0d10;
-      --surface:       #ffffff;
-      --bg:            #f4f2ed;
-      --border:        #d6d0c4;
-      --muted:         #8a8478;
-      --accent:        #b8912e;
-      --accent-light:  #fdf6e3;
-      --accent-dark:   #8b6b20;
-      --navy:          #1a2a4a;
-      --disabled-bg:   #eeecea;
-      --disabled-text: #b8b4ac;
-      --success:       #2d7d4e;
-      --radius:        12px;
-      --radius-pill:   9999px;
-      --shadow:        0 2px 20px rgba(0,0,0,0.08);
-      --trans:         0.25s cubic-bezier(0.4, 0, 0.2, 1);
-      --font:          'Noto Sans JP', -apple-system, sans-serif;
+      --accent:      #b8912e;
+      --accent-dark: #8b6b20;
+      --accent-light:#fdf6e3;
+      --base:        #1a1a1a;
+      --muted:       #888;
+      --bg:          #f7f5f0;
+      --border:      #e0dbd0;
+      --surface:     #ffffff;
+      --success:     #2d7d4e;
+      --radius:      12px;
+      --radius-pill: 9999px;
+      --trans:       0.2s ease;
+      --font:        'Noto Sans JP', -apple-system, sans-serif;
     }
 
     html, body {
-      min-height: 100vh;
+      height: 100%; height: 100dvh;
       font-family: var(--font);
+      background: var(--bg);
       color: var(--base);
       -webkit-font-smoothing: antialiased;
-      background: var(--bg);
+      overflow: hidden;
     }
 
-    /* ===== Header ===== */
-    .lp-header {
-      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
-      background: rgba(255,255,255,0.92); backdrop-filter: blur(10px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px; height: 60px;
-      display: flex; align-items: center; justify-content: space-between;
-    }
-    .lp-header .brand {
-      font-size: 13px; font-weight: 700; letter-spacing: 0.15em;
-      text-transform: uppercase; color: var(--navy);
-    }
-    .header-reserve-btn {
-      padding: 8px 20px; background: var(--accent);
-      border: none; border-radius: var(--radius-pill);
-      color: white; font-family: var(--font); font-size: 13px;
-      font-weight: 700; cursor: pointer; transition: all var(--trans);
-    }
-    .header-reserve-btn:hover { background: var(--accent-dark); }
-
-    /* ===== Hero ===== */
-    .lp-hero {
-      min-height: 100vh;
-      background: var(--navy);
+    /* ===== 1画面レイアウト ===== */
+    .page {
+      height: 100%; height: 100dvh;
       display: flex; flex-direction: column;
       align-items: center; justify-content: center;
-      text-align: center; padding: 100px 32px 60px;
-      position: relative; overflow: hidden;
+      padding: 32px 24px;
+      gap: 0;
     }
-    .lp-hero::before {
-      content: '';
-      position: absolute; inset: 0;
-      background:
-        radial-gradient(ellipse 70% 50% at 50% 30%, rgba(184,145,46,0.18) 0%, transparent 70%),
-        radial-gradient(ellipse 40% 60% at 80% 80%, rgba(184,145,46,0.08) 0%, transparent 60%);
-      pointer-events: none;
-    }
-    .hero-label {
-      font-size: 11px; font-weight: 500; letter-spacing: 0.25em;
+
+    .tag {
+      font-size: 11px; font-weight: 500; letter-spacing: 0.2em;
       text-transform: uppercase; color: var(--accent);
-      margin-bottom: 20px;
-    }
-    .hero-title {
-      font-size: clamp(28px, 7vw, 52px); font-weight: 700;
-      color: white; letter-spacing: 0.03em; line-height: 1.25;
-      margin-bottom: 20px;
-    }
-    .hero-title span { color: var(--accent); }
-    .hero-sub {
-      font-size: clamp(14px, 3vw, 16px); color: rgba(255,255,255,0.55);
-      line-height: 1.9; margin-bottom: 48px; max-width: 420px;
-    }
-    .hero-cta {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 17px 40px; background: var(--accent);
-      border: none; border-radius: var(--radius-pill);
-      color: white; font-family: var(--font);
-      font-size: 15px; font-weight: 700; letter-spacing: 0.05em;
-      cursor: pointer; transition: all var(--trans);
-      box-shadow: 0 4px 24px rgba(184,145,46,0.4);
-    }
-    .hero-cta:hover {
-      background: var(--accent-dark); transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(184,145,46,0.5);
-    }
-    .hero-cta:active { transform: scale(0.97); }
-    .hero-cta-icon { font-size: 18px; }
-    .hero-scroll {
-      position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
-      display: flex; flex-direction: column; align-items: center; gap: 6px;
-      color: rgba(255,255,255,0.3); font-size: 10px; letter-spacing: 0.15em;
-    }
-    .hero-scroll-line {
-      width: 1px; height: 32px;
-      background: linear-gradient(to bottom, rgba(255,255,255,0.3), transparent);
+      margin-bottom: 16px;
     }
 
-    /* ===== Services ===== */
-    .lp-section {
-      padding: 80px 24px; max-width: 680px; margin: 0 auto;
-    }
-    .section-label {
-      font-size: 10px; font-weight: 700; letter-spacing: 0.2em;
-      text-transform: uppercase; color: var(--accent); margin-bottom: 12px;
-    }
-    .section-title {
-      font-size: clamp(22px, 4vw, 30px); font-weight: 700;
-      letter-spacing: 0.02em; margin-bottom: 40px; line-height: 1.3;
-    }
-    .service-cards {
-      display: flex; flex-direction: column; gap: 16px;
-    }
-    .service-card {
-      background: var(--surface); border: 1px solid var(--border);
-      border-radius: var(--radius); padding: 24px 28px;
-      display: flex; align-items: center; justify-content: space-between;
-      box-shadow: var(--shadow);
-    }
-    .service-card-name { font-size: 17px; font-weight: 700; margin-bottom: 4px; }
-    .service-card-desc { font-size: 13px; color: var(--muted); }
-    .service-card-time {
-      font-size: 12px; color: var(--accent); font-weight: 500;
-      white-space: nowrap; padding-left: 16px;
+    h1 {
+      font-size: clamp(24px, 6vw, 40px);
+      font-weight: 700; letter-spacing: 0.02em;
+      line-height: 1.3; text-align: center;
+      margin-bottom: 12px;
     }
 
-    /* ===== Flow ===== */
-    .lp-flow { background: var(--navy); padding: 80px 24px; }
-    .lp-flow-inner { max-width: 680px; margin: 0 auto; }
-    .lp-flow .section-title { color: white; }
-    .lp-flow .section-label { color: var(--accent); }
-    .flow-steps {
-      display: flex; flex-direction: column; gap: 0;
+    .sub {
+      font-size: 13px; color: var(--muted);
+      text-align: center; line-height: 1.8;
+      margin-bottom: 40px;
     }
-    .flow-step {
-      display: flex; gap: 20px; align-items: flex-start;
-      padding: 20px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
-    }
-    .flow-step:last-child { border-bottom: none; }
-    .flow-num {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: 1.5px solid var(--accent); color: var(--accent);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 13px; font-weight: 700; flex-shrink: 0;
-    }
-    .flow-text-title { font-size: 15px; font-weight: 700; color: white; margin-bottom: 4px; }
-    .flow-text-sub { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.7; }
 
-    /* ===== CTA section ===== */
-    .lp-cta {
-      padding: 80px 24px; text-align: center;
-      background: var(--bg);
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 15px 36px;
+      background: var(--accent); border: none; border-radius: var(--radius-pill);
+      color: white; font-family: var(--font); font-size: 15px; font-weight: 700;
+      letter-spacing: 0.04em; cursor: pointer;
+      transition: all var(--trans);
+      box-shadow: 0 4px 20px rgba(184,145,46,0.3);
     }
-    .lp-cta-inner { max-width: 480px; margin: 0 auto; }
-    .lp-cta .section-title { margin-bottom: 12px; }
-    .lp-cta-sub { font-size: 14px; color: var(--muted); margin-bottom: 36px; line-height: 1.8; }
-    .lp-cta-btn {
-      display: inline-flex; align-items: center; gap: 10px;
-      padding: 17px 44px; background: var(--accent);
-      border: none; border-radius: var(--radius-pill);
-      color: white; font-family: var(--font);
-      font-size: 15px; font-weight: 700; letter-spacing: 0.04em;
-      cursor: pointer; transition: all var(--trans);
-      box-shadow: 0 4px 20px rgba(184,145,46,0.35);
-    }
-    .lp-cta-btn:hover {
-      background: var(--accent-dark); transform: translateY(-2px);
-    }
-    .lp-cta-btn:active { transform: scale(0.97); }
+    .btn-primary:hover  { background: var(--accent-dark); transform: translateY(-1px); }
+    .btn-primary:active { transform: scale(0.97); }
 
-    /* ===== Footer ===== */
-    .lp-footer {
-      background: var(--navy); padding: 32px 24px; text-align: center;
-    }
-    .lp-footer p {
-      font-size: 11px; color: rgba(255,255,255,0.3); letter-spacing: 0.08em;
+    .footer-note {
+      position: fixed; bottom: 20px; left: 0; right: 0;
+      text-align: center; font-size: 11px; color: #bbb;
+      letter-spacing: 0.05em;
     }
 
     /* ===== Modal ===== */
     .modal-overlay {
       position: fixed; inset: 0; z-index: 500;
-      background: rgba(14,13,16,0.6); backdrop-filter: blur(4px);
+      background: rgba(0,0,0,0.45); backdrop-filter: blur(4px);
       display: flex; align-items: center; justify-content: center;
       padding: 16px;
       opacity: 0; pointer-events: none;
-      transition: opacity 0.25s ease;
+      transition: opacity 0.2s ease;
     }
-    .modal-overlay.open {
-      opacity: 1; pointer-events: auto;
-    }
+    .modal-overlay.open { opacity: 1; pointer-events: auto; }
+
     .modal-box {
       background: var(--surface); border-radius: 20px;
-      padding: 28px 24px 24px; width: 100%; max-width: 440px;
-      max-height: 90vh; overflow-y: auto;
-      box-shadow: 0 24px 64px rgba(0,0,0,0.25);
-      transform: translateY(16px); transition: transform 0.3s cubic-bezier(0.4,0,0.2,1);
-      position: relative;
+      padding: 24px 20px 20px; width: 100%; max-width: 420px;
+      max-height: 92dvh; overflow-y: auto;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.2);
+      transform: translateY(12px);
+      transition: transform 0.25s cubic-bezier(0.4,0,0.2,1);
     }
     .modal-overlay.open .modal-box { transform: translateY(0); }
 
     .modal-header {
       display: flex; align-items: center; justify-content: space-between;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
     }
-    .modal-title { font-size: 17px; font-weight: 700; letter-spacing: 0.02em; }
+    .modal-title { font-size: 16px; font-weight: 700; }
     .modal-close {
-      width: 32px; height: 32px; border-radius: 50%;
+      width: 30px; height: 30px; border-radius: 50%;
       background: var(--bg); border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      font-size: 16px; color: var(--muted); transition: all var(--trans);
+      font-size: 14px; color: var(--muted); transition: background var(--trans);
     }
-    .modal-close:hover { background: var(--border); color: var(--base); }
+    .modal-close:hover { background: var(--border); }
 
     /* Month nav */
     .month-nav {
       display: flex; align-items: center; justify-content: space-between;
-      background: var(--bg); border-radius: var(--radius);
-      padding: 10px 14px; margin-bottom: 16px;
+      background: var(--bg); border-radius: 8px;
+      padding: 8px 12px; margin-bottom: 12px;
     }
     .month-nav-btn {
-      width: 30px; height: 30px; border-radius: 50%;
+      width: 28px; height: 28px; border-radius: 50%;
       background: none; border: none; cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
       font-size: 16px; color: var(--muted); transition: all var(--trans);
     }
-    .month-nav-btn:hover:not(:disabled) { background: var(--surface); color: var(--accent); }
+    .month-nav-btn:hover:not(:disabled) { color: var(--accent); }
     .month-nav-btn:disabled { opacity: 0.3; cursor: not-allowed; }
-    .month-nav-label { font-size: 14px; font-weight: 700; letter-spacing: 0.05em; }
+    .month-nav-label { font-size: 14px; font-weight: 700; }
 
     /* Calendar grid */
     .modal-cal-grid {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px;
-      margin-bottom: 16px;
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px;
+      margin-bottom: 12px;
     }
     .modal-cal-dow {
-      text-align: center; font-size: 12px; font-weight: 700;
-      color: var(--muted); letter-spacing: 0.04em; padding: 8px 0;
+      text-align: center; font-size: 11px; font-weight: 700;
+      color: var(--muted); padding: 6px 0;
     }
     .modal-cal-dow.sun { color: #c0392b; }
     .modal-cal-dow.sat { color: #2980b9; }
     .modal-cal-day {
       aspect-ratio: 1; display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 2px;
-      border-radius: 8px; font-size: 14px; font-weight: 500;
-      transition: background var(--trans); position: relative;
+      align-items: center; justify-content: center; gap: 1px;
+      border-radius: 6px; font-size: 13px; font-weight: 500;
     }
-    .modal-cal-day .day-num { line-height: 1; }
-    .modal-cal-day .day-mark { font-size: 11px; line-height: 1; }
+    .modal-cal-day .day-mark { font-size: 10px; }
     .modal-cal-day.sun:not(.past):not(.empty) { color: #e74c3c; }
     .modal-cal-day.sat:not(.past):not(.empty) { color: #3498db; }
-
-    /* 状態ごとのスタイル */
-    .modal-cal-day.empty { }
-    .modal-cal-day.past  { color: var(--disabled-text); }
-    .modal-cal-day.full  {
-      color: #c0392b; background: #fef0ee;
-    }
+    .modal-cal-day.past  { color: #ccc; }
+    .modal-cal-day.full  { color: #c0392b; background: #fef0ee; }
     .modal-cal-day.full .day-mark  { color: #c0392b; }
-    .modal-cal-day.few  {
-      background: var(--accent-light);
-    }
-    .modal-cal-day.few .day-num  { color: var(--accent-dark); }
-    .modal-cal-day.few .day-mark { color: var(--accent); }
-    .modal-cal-day.available {
-      background: #edf7f1;
-    }
+    .modal-cal-day.few   { background: var(--accent-light); }
+    .modal-cal-day.few .day-num   { color: var(--accent-dark); }
+    .modal-cal-day.few .day-mark  { color: var(--accent); }
+    .modal-cal-day.available { background: #edf7f1; }
     .modal-cal-day.available .day-num  { color: #1e6b40; }
     .modal-cal-day.available .day-mark { color: var(--success); }
-    .modal-cal-day.today::after {
-      content: ''; position: absolute; bottom: 3px; left: 50%; transform: translateX(-50%);
-      width: 3px; height: 3px; border-radius: 50%; background: var(--accent);
-    }
+    .modal-cal-day.today { outline: 2px solid var(--accent); outline-offset: -1px; }
 
-    /* スケルトン */
+    /* Skeleton */
     .cal-skeleton-row {
-      display: grid; grid-template-columns: repeat(7, 1fr); gap: 3px;
-      margin-bottom: 3px;
+      display: grid; grid-template-columns: repeat(7, 1fr); gap: 2px; margin-bottom: 2px;
     }
     .cal-skeleton-cell {
-      aspect-ratio: 1; border-radius: 8px;
-      background: linear-gradient(90deg, #ededeb 25%, #e2e2e0 50%, #ededeb 75%);
+      aspect-ratio: 1; border-radius: 6px;
+      background: linear-gradient(90deg,#ededeb 25%,#e2e2e0 50%,#ededeb 75%);
       background-size: 200% 100%;
       animation: shimmer 1.4s infinite;
     }
-    @keyframes shimmer { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
+    @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 
-    /* 凡例 */
+    /* Legend */
     .cal-legend {
-      display: flex; gap: 16px; justify-content: center;
-      margin-bottom: 20px; flex-wrap: wrap;
+      display: flex; gap: 12px; justify-content: center;
+      margin-bottom: 16px; flex-wrap: wrap;
     }
-    .legend-item {
-      display: flex; align-items: center; gap: 5px;
-      font-size: 11px; color: var(--muted);
-    }
-    .legend-dot {
-      width: 8px; height: 8px; border-radius: 2px;
-    }
+    .legend-item { display: flex; align-items: center; gap: 4px; font-size: 11px; color: var(--muted); }
+    .legend-dot { width: 8px; height: 8px; border-radius: 2px; }
     .legend-dot.available { background: #edf7f1; border: 1px solid #a5d6b8; }
     .legend-dot.few       { background: var(--accent-light); border: 1px solid #e0c070; }
     .legend-dot.full      { background: #fef0ee; border: 1px solid #e8a090; }
 
-    /* 予約ボタン */
+    /* Reserve btn */
     .modal-reserve-btn {
       display: flex; align-items: center; justify-content: center; gap: 8px;
-      width: 100%; padding: 15px;
+      width: 100%; padding: 14px;
       background: var(--accent); border: none; border-radius: var(--radius-pill);
-      color: white; font-family: var(--font); font-size: 15px; font-weight: 700;
-      letter-spacing: 0.04em; cursor: pointer; text-decoration: none;
-      transition: all var(--trans);
+      color: white; font-family: var(--font); font-size: 14px; font-weight: 700;
+      cursor: pointer; text-decoration: none; transition: all var(--trans);
     }
-    .modal-reserve-btn:hover {
-      background: var(--accent-dark); transform: translateY(-1px);
-      box-shadow: 0 4px 16px rgba(139,107,32,0.35);
-    }
-    .modal-reserve-btn:active { transform: scale(0.97); }
-    .modal-note {
-      text-align: center; font-size: 11px; color: var(--muted);
-      margin-top: 10px; line-height: 1.7;
-    }
+    .modal-reserve-btn:hover { background: var(--accent-dark); }
 
-    /* エラー */
+    /* Error */
     .cal-error {
-      padding: 20px; text-align: center;
-      color: #c0392b; font-size: 13px;
+      padding: 20px; text-align: center; color: #c0392b; font-size: 13px;
       background: #fef9f9; border: 1px solid #f0c8c8; border-radius: var(--radius);
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
     .cal-error-retry {
-      display: inline-block; margin-top: 8px; padding: 6px 14px;
+      display: inline-block; margin-top: 8px; padding: 5px 12px;
       background: none; border: 1px solid #c0392b; border-radius: var(--radius-pill);
       color: #c0392b; font-family: var(--font); font-size: 12px; cursor: pointer;
     }
@@ -354,125 +208,29 @@
 </head>
 <body>
 
-<!-- ===== Header ===== -->
-<header class="lp-header">
-  <div class="brand">Premium Car Wash</div>
-  <button class="header-reserve-btn" onclick="openModal()">空き状況を確認</button>
-</header>
-
-<!-- ===== Hero ===== -->
-<section class="lp-hero">
-  <div class="hero-label">Premium Hand Wash</div>
-  <h1 class="hero-title">
-    職人の手で磨く、<br><span>本物の輝き</span>へ。
-  </h1>
-  <p class="hero-sub">
-    一台一台、丁寧に。<br>
-    機械では届かない細部まで、<br>
-    熟練のスタッフが手仕事でお仕上げします。
-  </p>
-  <button class="hero-cta" onclick="openModal()">
-    <span class="hero-cta-icon">&#x1F4C5;</span>
-    空き状況を確認・ご予約
+<main class="page">
+  <div class="tag">Hand Wash &amp; Detailing</div>
+  <h1>手洗い洗車<br>ご予約</h1>
+  <p class="sub">空き状況を確認してそのまま予約できます</p>
+  <button class="btn-primary" onclick="openModal()">
+    &#x1F4C5;&ensp;空き状況を確認
   </button>
-  <div class="hero-scroll">
-    <div class="hero-scroll-line"></div>
-    SCROLL
-  </div>
-</section>
+</main>
 
-<!-- ===== Services ===== -->
-<section class="lp-section">
-  <div class="section-label">Services</div>
-  <h2 class="section-title">メニュー</h2>
-  <div class="service-cards">
-    <div class="service-card">
-      <div>
-        <div class="service-card-name">手洗い洗車</div>
-        <div class="service-card-desc">外装の汚れを丁寧に手洗いで除去</div>
-      </div>
-      <div class="service-card-time">約1時間</div>
-    </div>
-    <div class="service-card">
-      <div>
-        <div class="service-card-name">手洗い洗車＋オプション</div>
-        <div class="service-card-desc">内装清掃・ガラスコーティング等を追加可能</div>
-      </div>
-      <div class="service-card-time">約2〜3時間</div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Flow ===== -->
-<section class="lp-flow">
-  <div class="lp-flow-inner">
-    <div class="section-label">How to reserve</div>
-    <h2 class="section-title">ご予約の流れ</h2>
-    <div class="flow-steps">
-      <div class="flow-step">
-        <div class="flow-num">1</div>
-        <div>
-          <div class="flow-text-title">空き状況を確認</div>
-          <div class="flow-text-sub">カレンダーで希望の日程に空きがあるか確認します</div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">2</div>
-        <div>
-          <div class="flow-text-title">メニューと日時を選択</div>
-          <div class="flow-text-sub">ご希望のサービスと日付・時刻を選びます</div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">3</div>
-        <div>
-          <div class="flow-text-title">お客様情報を入力</div>
-          <div class="flow-text-sub">お名前と電話番号を入力して予約確定</div>
-        </div>
-      </div>
-      <div class="flow-step">
-        <div class="flow-num">4</div>
-        <div>
-          <div class="flow-text-title">SMS確認・当日お越しください</div>
-          <div class="flow-text-sub">予約完了後にSMSが届きます。当日お気をつけてお越しください</div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- ===== Bottom CTA ===== -->
-<section class="lp-cta">
-  <div class="lp-cta-inner">
-    <div class="section-label">Reservation</div>
-    <h2 class="section-title">ご予約はこちら</h2>
-    <p class="lp-cta-sub">
-      空き状況をリアルタイムで確認できます。<br>
-      希望の日時でそのままご予約いただけます。
-    </p>
-    <button class="lp-cta-btn" onclick="openModal()">
-      &#x1F4C5;&nbsp; 空き状況を確認・ご予約
-    </button>
-  </div>
-</section>
-
-<!-- ===== Footer ===== -->
-<footer class="lp-footer">
-  <p>&copy; 2025 Premium Car Wash. All rights reserved.</p>
-</footer>
+<p class="footer-note">&copy; 2025 Premium Car Wash</p>
 
 <!-- ===== Modal ===== -->
 <div class="modal-overlay" id="modal" onclick="onOverlayClick(event)">
   <div class="modal-box">
     <div class="modal-header">
       <div class="modal-title">空き状況</div>
-      <button class="modal-close" onclick="closeModal()" aria-label="閉じる">&#x2715;</button>
+      <button class="modal-close" onclick="closeModal()">&#x2715;</button>
     </div>
 
     <div class="month-nav">
-      <button class="month-nav-btn" id="month-prev" onclick="changeMonth(-1)" aria-label="前の月">&#x2039;</button>
+      <button class="month-nav-btn" id="month-prev" onclick="changeMonth(-1)">&#x2039;</button>
       <div class="month-nav-label" id="month-label"></div>
-      <button class="month-nav-btn" id="month-next" onclick="changeMonth(1)" aria-label="次の月">&#x203A;</button>
+      <button class="month-nav-btn" id="month-next" onclick="changeMonth(1)">&#x203A;</button>
     </div>
 
     <div id="modal-cal-area"></div>
@@ -483,39 +241,19 @@
       <div class="legend-item"><div class="legend-dot full"></div>満席</div>
     </div>
 
-    <a href="./index.html" class="modal-reserve-btn">
-      予約に進む &nbsp;&#x2192;
-    </a>
-    <p class="modal-note">予約フォームでメニューと日時をお選びください</p>
+    <a href="./index.html" class="modal-reserve-btn">予約に進む &nbsp;&#x2192;</a>
   </div>
 </div>
 
 <script>
-// ============================================================
-//  設定（index.html と同じ GAS URL を設定してください）
-// ============================================================
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbwK6HcVgMsoooDQa1ZhL5NvI9hCmAbGYdoVpEBKe2G6cDDmW0eZHUULs8JT15b0mBG8/exec';
+const DOW_NAMES = ['日','月','火','水','木','金','土'];
 
-const DOW_NAMES = ['日', '月', '火', '水', '木', '金', '土'];
+const calState = { year: null, month: null, cache: {} };
 
-// ============================================================
-//  状態
-// ============================================================
-const calState = {
-  year:  null,
-  month: null,
-  cache: {}  // { "2025-03": { days: {...} } }
-};
-
-// ============================================================
-//  モーダル開閉
-// ============================================================
 function openModal() {
-  const modal = document.getElementById('modal');
-  modal.classList.add('open');
+  document.getElementById('modal').classList.add('open');
   document.body.style.overflow = 'hidden';
-
-  // 初回だけ現在月を設定
   if (!calState.year) {
     const now = new Date();
     calState.year  = now.getFullYear();
@@ -533,58 +271,32 @@ function onOverlayClick(e) {
   if (e.target === document.getElementById('modal')) closeModal();
 }
 
-// Escキーで閉じる
-document.addEventListener('keydown', e => {
-  if (e.key === 'Escape') closeModal();
-});
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
 
-// ============================================================
-//  月ナビ
-// ============================================================
 function changeMonth(delta) {
   let m = calState.month + delta;
   let y = calState.year;
   if (m < 0)  { m = 11; y--; }
   if (m > 11) { m = 0;  y++; }
-
-  // 過去月には戻れない
   const now = new Date();
   if (y < now.getFullYear() || (y === now.getFullYear() && m < now.getMonth())) return;
-
-  // 3ヶ月先まで
-  const maxY = now.getFullYear();
-  const maxM = now.getMonth() + 3;
-  const maxDate = new Date(maxY, maxM, 1);
+  const maxDate = new Date(now.getFullYear(), now.getMonth() + 3, 1);
   if (new Date(y, m, 1) >= maxDate) return;
-
-  calState.year  = y;
-  calState.month = m;
+  calState.year = y; calState.month = m;
   renderModalCalendar(y, m);
 }
 
-// ============================================================
-//  カレンダー描画
-// ============================================================
 function renderModalCalendar(year, month) {
-  // ナビラベル更新
   document.getElementById('month-label').textContent = `${year}年${month + 1}月`;
-
-  // ナビボタン制御
   const now = new Date();
   document.getElementById('month-prev').disabled =
-    (year === now.getFullYear() && month <= now.getMonth()) ||
-    (year < now.getFullYear());
-  const nextYear = month === 11 ? year + 1 : year;
-  const nextMon  = month === 11 ? 0 : month + 1;
+    year < now.getFullYear() || (year === now.getFullYear() && month <= now.getMonth());
+  const ny = month === 11 ? year + 1 : year, nm = month === 11 ? 0 : month + 1;
   document.getElementById('month-next').disabled =
-    new Date(nextYear, nextMon, 1) >= new Date(now.getFullYear(), now.getMonth() + 3, 1);
+    new Date(ny, nm, 1) >= new Date(now.getFullYear(), now.getMonth() + 3, 1);
 
-  const cacheKey = `${year}-${String(month + 1).padStart(2, '0')}`;
-  if (calState.cache[cacheKey]) {
-    buildCalendarGrid(year, month, calState.cache[cacheKey].days);
-    return;
-  }
-
+  const key = `${year}-${String(month + 1).padStart(2,'0')}`;
+  if (calState.cache[key]) { buildCalendarGrid(year, month, calState.cache[key].days); return; }
   showCalSkeleton();
   fetchMonthData(year, month);
 }
@@ -603,17 +315,7 @@ function showCalSkeleton() {
 }
 
 async function fetchMonthData(year, month) {
-  const monthStr = `${year}-${String(month + 1).padStart(2, '0')}`;
-
-  // デモモード
-  if (GAS_URL === 'YOUR_GAS_WEBAPP_URL') {
-    await new Promise(r => setTimeout(r, 600));
-    const days = generateDemoData(year, month);
-    calState.cache[monthStr] = { days };
-    buildCalendarGrid(year, month, days);
-    return;
-  }
-
+  const monthStr = `${year}-${String(month + 1).padStart(2,'0')}`;
   try {
     const res  = await fetch(`${GAS_URL}?month=${monthStr}&duration=1`);
     const data = await res.json();
@@ -632,91 +334,37 @@ function buildCalendarGrid(year, month, days) {
   const daysInMon = new Date(year, month + 1, 0).getDate();
 
   let html = '<div class="modal-cal-grid">';
-
-  // 曜日ヘッダー
   DOW_NAMES.forEach((d, i) => {
-    const cls = i === 0 ? ' sun' : i === 6 ? ' sat' : '';
-    html += `<div class="modal-cal-dow${cls}">${d}</div>`;
+    html += `<div class="modal-cal-dow${i===0?' sun':i===6?' sat':''}">${d}</div>`;
   });
-
-  // 空白セル
-  for (let i = 0; i < firstDow; i++) {
-    html += '<div class="modal-cal-day empty"></div>';
-  }
-
-  // 日付セル
+  for (let i = 0; i < firstDow; i++) html += '<div class="modal-cal-day empty"></div>';
   for (let d = 1; d <= daysInMon; d++) {
-    const mm      = String(month + 1).padStart(2, '0');
-    const dd      = String(d).padStart(2, '0');
+    const mm = String(month+1).padStart(2,'0'), dd = String(d).padStart(2,'0');
     const dateStr = `${year}-${mm}-${dd}`;
-    const dow     = new Date(year, month, d).getDay();
-    const status  = days[dateStr] || 'past';
-    const isToday = dateStr === todayStr;
-
+    const dow = new Date(year, month, d).getDay();
+    const status = days[dateStr] || 'past';
     let cls = `modal-cal-day ${status}`;
     if (dow === 0) cls += ' sun';
     if (dow === 6) cls += ' sat';
-    if (isToday)   cls += ' today';
-
-    const mark = status === 'available' ? '○' :
-                 status === 'few'       ? '△' :
-                 status === 'full'      ? '✕' : '';
-
-    html += `<div class="${cls}">
-      <span class="day-num">${d}</span>
-      ${mark ? `<span class="day-mark">${mark}</span>` : ''}
-    </div>`;
+    if (dateStr === todayStr) cls += ' today';
+    const mark = status==='available'?'○':status==='few'?'△':status==='full'?'✕':'';
+    html += `<div class="${cls}"><span class="day-num">${d}</span>${mark?`<span class="day-mark">${mark}</span>`:''}` + `</div>`;
   }
-
   html += '</div>';
   area.innerHTML = html;
 }
 
 function showCalError(retryFn) {
-  const area = document.getElementById('modal-cal-area');
-  area.innerHTML = `
-    <div class="cal-error">
-      空き状況の取得に失敗しました
+  document.getElementById('modal-cal-area').innerHTML = `
+    <div class="cal-error">空き状況の取得に失敗しました
       <br><button class="cal-error-retry" onclick="(${retryFn.toString()})()">再試行</button>
     </div>`;
 }
 
-// ============================================================
-//  ユーティリティ
-// ============================================================
 function getTodayStr() {
-  const d  = new Date();
-  const y  = d.getFullYear();
-  const m  = String(d.getMonth() + 1).padStart(2, '0');
-  const dd = String(d.getDate()).padStart(2, '0');
-  return `${y}-${m}-${dd}`;
-}
-
-// デモ用ダミーデータ生成
-function generateDemoData(year, month) {
-  const days = {};
-  const daysInMon = new Date(year, month + 1, 0).getDate();
-  const todayStr  = getTodayStr();
-  const statuses  = ['available', 'available', 'available', 'few', 'few', 'full'];
-
-  for (let d = 1; d <= daysInMon; d++) {
-    const mm      = String(month + 1).padStart(2, '0');
-    const dd      = String(d).padStart(2, '0');
-    const dateStr = `${year}-${mm}-${dd}`;
-    const dow     = new Date(year, month, d).getDay();
-
-    if (dateStr < todayStr) {
-      days[dateStr] = 'past';
-    } else if (dow === 0) {
-      // 日曜は休み
-      days[dateStr] = 'full';
-    } else {
-      days[dateStr] = statuses[d % statuses.length];
-    }
-  }
-  return days;
+  const d = new Date();
+  return `${d.getFullYear()}-${String(d.getMonth()+1).padStart(2,'0')}-${String(d.getDate()).padStart(2,'0')}`;
 }
 </script>
-
 </body>
 </html>
